@@ -1,0 +1,6 @@
+{
+	// Percorsi delle cartelle in cui cercare i file header
+	"C_Cpp.default.includePath": [
+		"${workspaceFolder}\\include"
+	],
+}

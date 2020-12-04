@@ -1,0 +1,28 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug",
+			"type": "cppdbg",
+			"request": "launch",
+			// Nome dell'eseguibile
+			"program": "${workspaceFolder}\\build\\${workspaceFolderBasename}.exe",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"miDebuggerPath": "C:\\ProgramData\\chocolatey\\bin\\gdb.exe",
+			"setupCommands": [
+				{
+					"description": "Abilita la riformattazione per gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				}
+			],
+			// Il task è specificato nel file tasks.json
+			"preLaunchTask": "Compila con Make"
+		}
+	]
+}
