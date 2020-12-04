@@ -34,7 +34,7 @@ goto end
 
 :help
   echo.
-  echo The command "setup_cpp_proj" creates a new directory consisting of all the files and
+  echo The command "setup-cpp-proj" creates a new directory consisting of all the files and
   echo directories you will need to code a C++ project in Visual Studio Code
   echo.
   echo parameters:
