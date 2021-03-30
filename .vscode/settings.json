@@ -3,4 +3,16 @@
 	"C_Cpp.default.includePath": [
 		"${workspaceFolder}/include"
 	],
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "${workspaceFolder}/build/",
+			"binaryPath": "${workspaceFolder}/build/${workspaceFolderBasename}",
+			"binaryArgs": []
+		}
+	],
+	"makefile.configurations": [
+		{
+			"name": "Default"
+		},
+	]
 }

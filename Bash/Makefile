@@ -41,11 +41,11 @@ OBJ          := $(patsubst $(BUILD)/%$(OBJEXT),%$(OBJEXT), $(OBJECTS))
 DEPENDENCIES := $(patsubst $(SRC)/%$(SRCEXT),$(BUILD)/%$(DEPEXT), $(SOURCES))
 
 # Colors:
-red    := \[[1;91m\]
-green  := \[[1;92m\]
-blue   := \[[1;94m\]
-yellow := \[[1;93m\]
-end    := \[[0m\]
+red    := [1;91m
+green  := [1;92m
+blue   := [1;94m
+yellow := [1;93m
+end    := [0m
 
 # Targets:
 build: $(EXECUTABLE)
@@ -54,7 +54,7 @@ all: $(OBJECTS)
 
 $(EXECUTABLE): $(OBJECTS)
 	@$(CXX) $(CXXFLAGS) $(OBJECTS) -o "$(EXECUTABLE)"
-	@echo ========== $(green)$(patsubst $(BUILD)/%,%, $(EXECUTABLE))$(end) compiled successfully ==========
+	@echo "========== $(green)$(patsubst $(BUILD)/%,%, $(EXECUTABLE))$(end) compiled successfully =========="
 
 run: build
 	@echo "$(green)$(patsubst $(BUILD)/%,%, $(EXECUTABLE))$(end)>"
@@ -65,7 +65,7 @@ run: build
 		$(CXX) $(CXXFLAGS) *.o -o $(EXECUTABLE) else \
 		$(CXX) $(CXXFLAGS) *$(OBJEXT) -o $(EXECUTABLE)
 
-#	@echo ========== $(green)$(patsubst $(BUILD)/%,%, $(EXECUTABLE))$(end) compiled successfully ==========
+#	@echo "========== $(green)$(patsubst $(BUILD)/%,%, $(EXECUTABLE))$(end) compiled successfully =========="
 
 # Includes dependency files in their relatives object target dependencies
 -include $(DEPENDENCIES)
