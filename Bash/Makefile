@@ -3,13 +3,12 @@
 # Made by Alberto Lazari #
 ##########################
 
-# To learn how to use this Makefile just type "make help" in the root dir of your project
+# To learn how to use this Makefile just type "make help" in the root directory of your project
 
 # vvv Project and compilation parameters vvv #
 ##############################################
 
 # Directories containing the sources to compile (SRC) and build files (BUILD)
-# If non-existing they will be automatically created
 SRC   := src
 BUILD := build
 
@@ -72,10 +71,6 @@ run: build
 -include $(DEPENDENCIES)
 
 $(OBJECTS): $(BUILD)/%$(OBJEXT): $(SRC)/%$(SRCEXT)
-#	Creates needed dirs if non-existent
-	@test -d $(SRC) || mkdir $(SRC) > /dev/null
-	@test -d $(BUILD) || mkdir $(BUILD) > /dev/null
-
 	@echo "building $(blue)$(patsubst $(BUILD)/%$(OBJEXT), %$(OBJEXT), $@)$(end)"
 	@$(CXX) $(CXXFLAGS) -MMD -MF \
 		$(patsubst $(BUILD)/%$(OBJEXT), $(BUILD)/%$(DEPEXT), $@) -c $< -o $@
