@@ -1,0 +1,6 @@
+{
+	// Paths containing the header files
+	"C_Cpp.default.includePath": [
+		"${workspaceFolder}/include"
+	],
+}
