@@ -9,7 +9,7 @@
 ##############################################
 
 # Directories containing the sources to compile (SRC) and build files (BUILD)
-SRC   := src
+SRC   := .
 BUILD := build
 
 # Insert here the directories containing the header files
@@ -41,11 +41,11 @@ OBJ          := $(patsubst $(BUILD)/%$(OBJEXT),%$(OBJEXT), $(OBJECTS))
 DEPENDENCIES := $(patsubst $(SRC)/%$(SRCEXT),$(BUILD)/%$(DEPEXT), $(SOURCES))
 
 # Colors:
-red    := [1;91m
-green  := [1;92m
-blue   := [1;94m
-yellow := [1;93m
-end    := [0m
+red    := \[[1;91m\]
+green  := \[[1;92m\]
+blue   := \[[1;94m\]
+yellow := \[[1;93m\]
+end    := \[[0m\]
 
 # Targets:
 build: $(EXECUTABLE)
@@ -71,6 +71,9 @@ run: build
 -include $(DEPENDENCIES)
 
 $(OBJECTS): $(BUILD)/%$(OBJEXT): $(SRC)/%$(SRCEXT)
+	# Creates needed dirs if non-existent
+	@test -d $(BUILD) || mkdir $(BUILD) > /dev/null
+
 	@echo "building $(blue)$(patsubst $(BUILD)/%$(OBJEXT), %$(OBJEXT), $@)$(end)"
 	@$(CXX) $(CXXFLAGS) -MMD -MF \
 		$(patsubst $(BUILD)/%$(OBJEXT), $(BUILD)/%$(DEPEXT), $@) -c $< -o $@
