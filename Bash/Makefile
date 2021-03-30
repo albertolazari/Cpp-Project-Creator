@@ -42,10 +42,10 @@ OBJ          := $(patsubst $(BUILD)/%$(OBJEXT),%$(OBJEXT), $(OBJECTS))
 DEPENDENCIES := $(patsubst $(SRC)/%$(SRCEXT),$(BUILD)/%$(DEPEXT), $(SOURCES))
 
 # Colors:
-red    := [91m
-green  := [92m
-blue   := [94m
-yellow := [93m
+red    := [1;91m
+green  := [1;92m
+blue   := [1;94m
+yellow := [1;93m
 end    := [0m
 
 # Targets:
