@@ -98,7 +98,7 @@ help:
 	@echo Actually, you can pass different parameters to make:
 	@echo ""
 	@echo "$(yellow)help$(end)      shows this message"
-	@echo "$(yellow)build$(end)     compiles the project (gets called by default, which means when you only call "make")"
+	@echo "$(yellow)build$(end)     compiles the project (default, gets called by only typing "make")"
 	@echo "$(yellow)all$(end)       compiles all of the project's objects without linking them"
 	@echo "$(yellow)linking$(end)   links all of the (OBJEXT)* and .o files that are placed in the (BUILD)* directory,"
 	@echo "          which means you can link the objects produced by the project (automatically,"
