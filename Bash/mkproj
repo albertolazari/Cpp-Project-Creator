@@ -1,0 +1,77 @@
+#!/bin/bash
+
+##########################
+# Made by Alberto Lazari #
+##########################
+
+# This is a simple script to create a new C++ Project. It creates a new folder containing the folders
+# you will need and a Makefile that works out-of-the-box
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+HERE=0
+
+printHelp() {
+    echo "Usage: mkproj [OPTION] PROJECT"
+    echo "Create a new C++ PROJECT, if it does not already exist."
+    echo ""
+    echo "Options:"
+    echo "  -h, --help  display this help and exit"
+    echo "      --here  set up the project in the current directory"
+}
+
+createDir() {
+    if [[ -e "$1" ]]; then
+        return 1
+    fi
+    mkdir "$1"
+}
+
+setupDir() {
+    mkdir "$1"/{src,include}
+    cp $SCRIPT_DIR/Makefile "$1"/Makefile
+    cp -r $SCRIPT_DIR/../.vscode/ "$1"/.vscode/
+}
+
+checkFlags() {
+    if [[ $# == 0 ]] ; then
+        return 1
+    fi
+
+    while [[ $# != 0 ]]
+    do
+        case $1 in
+            -h|--help)
+                printHelp
+                exit
+                ;;
+            --here)
+                HERE=1
+                ;;
+            -*)
+                echo "mkproj: unrecognized option '$1'"
+                echo "try 'mkproj -h' or 'mkproj --help' for more information."
+                exit 1
+                ;;
+            *)
+                PROJ_NAME=$1
+                ;;
+        esac
+        shift
+    done
+}
+
+if ! checkFlags $@; then
+    printHelp
+    exit 1
+fi
+
+if [[ $HERE == 0 ]] && ! createDir $PROJ_NAME; then
+    echo "cannot create project '$PROJ_NAME': File already exists"
+    exit 1
+fi
+
+if  [[ $HERE == 0 ]]; then
+    setupDir $PROJ_NAME
+else
+    setupDir $PWD
+fi
