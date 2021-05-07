@@ -8,44 +8,61 @@
 # you will need and a Makefile that works out-of-the-box
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-HERE=0
+PROJ_NAME=""
+
+# Options
+HERE=false
+MAKEFILE=false
+NO_DIRS=false
 
 printHelp() {
     echo "Usage: mkproj [OPTION] PROJECT"
-    echo "Create a new C++ PROJECT, if it does not already exist."
+    echo "Create the C++ PROJECT, if it does not already exist."
     echo ""
     echo "Options:"
-    echo "  -h, --help  display this help and exit"
-    echo "      --here  set up the project in the current directory"
+    echo "  -h, --help           display this help and exit"
+    echo "  -m, --makefile-only  only creates/updates the Makefile"
+    echo "      --here           set up the project in the current directory"
+    echo "      --no-dirs        does not create src/ and include/ directories"
 }
 
 createDir() {
-    if [[ -e "$1" ]]; then
+    if [ -e "$1" ]; then
         return 1
     fi
     mkdir "$1"
 }
 
 setupDir() {
-    mkdir "$1"/{src,include}
-    cp $SCRIPT_DIR/Makefile "$1"/Makefile
-    cp -r $SCRIPT_DIR/../.vscode/ "$1"/.vscode/
+    cp "$SCRIPT_DIR"/Makefile "$1"/Makefile
+    if [ $MAKEFILE = false ] && [ $NO_DIRS = false ]; then
+        mkdir "$1"/{src,include}
+    fi
+    if [ $MAKEFILE = false ]; then
+        cp -r "$SCRIPT_DIR"/../.vscode/ "$1"/.vscode/
+    fi
 }
 
 checkFlags() {
-    if [[ $# == 0 ]] ; then
+    if [ $# = 0 ] ; then
         return 1
     fi
 
-    while [[ $# != 0 ]]
+    while [ $# != 0 ]
     do
         case $1 in
             -h|--help)
                 printHelp
                 exit
                 ;;
+            -m|--makefile-only)
+                MAKEFILE=true
+                ;;
             --here)
-                HERE=1
+                HERE=true
+                ;;
+            --no-dirs)
+                NO_DIRS=true
                 ;;
             -*)
                 echo "mkproj: unrecognized option '$1'"
@@ -60,18 +77,18 @@ checkFlags() {
     done
 }
 
-if ! checkFlags $@; then
+if ! checkFlags "$@" || ( [ $HERE = false ] && [ "$PROJ_NAME" = "" ] ); then
     printHelp
     exit 1
 fi
 
-if [[ $HERE == 0 ]] && ! createDir $PROJ_NAME; then
+if [ $HERE = false ] && ! createDir "$PROJ_NAME"; then
     echo "cannot create project '$PROJ_NAME': File already exists"
     exit 1
 fi
 
-if  [[ $HERE == 0 ]]; then
-    setupDir $PROJ_NAME
+if  [ $HERE = false ]; then
+    setupDir "$PROJ_NAME"
 else
-    setupDir $PWD
+    setupDir "$PWD"
 fi
