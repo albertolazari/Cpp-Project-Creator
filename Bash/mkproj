@@ -21,9 +21,9 @@ printHelp() {
     echo ""
     echo "Options:"
     echo "  -h, --help           display this help and exit"
-    echo "  -m, --makefile-only  only creates/updates the Makefile"
+    echo "  -m, --makefile-only  only create/update the Makefile"
     echo "      --here           set up the project in the current directory"
-    echo "      --no-dirs        does not create src/ and include/ directories"
+    echo "      --no-dirs        do not create src/ and include/ directories"
 }
 
 createDir() {
