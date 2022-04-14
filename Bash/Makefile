@@ -93,12 +93,12 @@ clean:
 	@echo "$(yellow)build$(end) directory cleaned"
 
 help:
-	@echo "This $(yellow)Auto Makefile$(end) lets you compile a C++ project automatically, just type make ;)"
+	@echo "This $(yellow)Auto Makefile$(end) lets you compile a C++ project automatically, just type 'make' ;)"
 	@echo ""
 	@echo Actually, you can pass different parameters to make:
 	@echo ""
 	@echo "$(yellow)help$(end)      shows this message"
-	@echo "$(yellow)build$(end)     compiles the project (default, gets called by only typing "make")"
+	@echo "$(yellow)build$(end)     compiles the project (default, gets called by only typing 'make')"
 	@echo "$(yellow)all$(end)       compiles all of the project's objects without linking them"
 	@echo "$(yellow)linking$(end)   links all of the (OBJEXT)* and .o files that are placed in the (BUILD)* directory,"
 	@echo "          which means you can link the objects produced by the project (automatically,"
